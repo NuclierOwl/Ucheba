@@ -1,16 +1,16 @@
 CREATE TABLE созвездия (
-    айди INT PRIMARY KEY,
-    название VARCHAR(255),
-    описание TEXT
+    ID INT PRIMARY KEY,
+    Name VARCHAR(255),
+    Description TEXT
 );
 
 CREATE TABLE звезды (
-    айди INT PRIMARY KEY,
+    ID_Zvezda INT PRIMARY KEY,
     название VARCHAR(255),
-    координаты_x DECIMAL(10, 2),
-    координаты_y DECIMAL(10, 2),
-    описание TEXT,
-    айди_созвездия INT,
-    размер_звезды VARCHAR(50),
-    FOREIGN KEY (айди_созвездия) REFERENCES созвездия(айди)
+    Ox DECIMAL(10, 2),
+    Oy DECIMAL(10, 2),
+    Description TEXT,
+    ID_Sozvezdie INT,
+    Razmer VARCHAR(50),
+    FOREIGN KEY (ID_Sozvezdie) REFERENCES созвездия(ID)
 );
