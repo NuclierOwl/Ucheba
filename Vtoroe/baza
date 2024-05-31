@@ -1,0 +1,16 @@
+CREATE TABLE созвездия (
+    айди INT PRIMARY KEY,
+    название VARCHAR(255),
+    описание TEXT
+);
+
+CREATE TABLE звезды (
+    айди INT PRIMARY KEY,
+    название VARCHAR(255),
+    координаты_x DECIMAL(10, 2),
+    координаты_y DECIMAL(10, 2),
+    описание TEXT,
+    айди_созвездия INT,
+    размер_звезды VARCHAR(50),
+    FOREIGN KEY (айди_созвездия) REFERENCES созвездия(айди)
+);
