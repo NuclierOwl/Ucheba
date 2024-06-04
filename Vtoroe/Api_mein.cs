@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
-// Класс для представления звезды
 public class Star
 {
     public int Id { get; set; }
@@ -13,61 +13,97 @@ public class Star
     public string StarSize { get; set; }
 }
 
-// Класс для представления созвездия
 public class Constellation
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+    public List<Star> Stars { get; set; } = new List<Star>();
 }
 
-// Класс для управления звездами и созвездиями
 public class DatabaseManager
 {
-    private List<Star> stars = new List<Star>();
-    private List<Constellation> constellations = new List<Constellation>();
+    public List<Star> Stars { get; private set; } = new List<Star>();
+    public List<Constellation> Constellations { get; private set; } = new List<Constellation>();
 
-    // Метод для загрузки данных из базы данных в списки
     public void LoadDataFromDatabase()
     {
-        // Загрузка данных из базы данных
+        // Здесь должен быть код для загрузки данных из базы данных
+        // Это пример, данные должны быть загружены из реальной базы данных
+        Stars.Add(new Star { Id = 1, Name = "Сириус", CoordinateX = -1.46, CoordinateY = 8.6, Description = "Самая яркая звезда ночного неба", ConstellationId = 1, StarSize = "large" });
+        Constellations.Add(new Constellation { Id = 1, Name = "Большой Пёс", Description = "Созвездие южного полушария неба" });
     }
 
-    // Метод для отображения информации о звездах
     public void DisplayStarsInformation()
     {
-        // Отображение информации о звездах
+        foreach (var constellation in Constellations)
+        {
+            Console.WriteLine($"Созвездие: {constellation.Name}");
+            var starsInConstellation = Stars.Where(s => s.ConstellationId == constellation.Id).ToList();
+            foreach (var star in starsInConstellation)
+            {
+                Console.WriteLine($"Звезда: {star.Name} ({star.StarSize})");
+            }
+        }
     }
 
-    // Метод для отображения подробной информации о звезде
     public void DisplayStarDetails(int starId)
     {
-        // Отображение подробной информации о звезде
+        var star = Stars.FirstOrDefault(s => s.Id == starId);
+        if (star != null)
+        {
+            var constellation = Constellations.FirstOrDefault(c => c.Id == star.ConstellationId);
+            Console.WriteLine($"Название звезды: {star.Name}");
+            Console.WriteLine($"Описание: {star.Description}");
+            Console.WriteLine($"Координаты: X: {star.CoordinateX}, Y: {star.CoordinateY}");
+            if (constellation != null)
+            {
+                Console.WriteLine($"Созвездие: {constellation.Name}");
+                Console.WriteLine($"Описание созвездия: {constellation.Description}");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Звезда не найдена.");
+        }
     }
 
-    // Метод для отображения подробной информации о звезде
     public void DisplayStarDetails(string starName)
     {
-        // Отображение подробной информации о звезде
+        var star = Stars.FirstOrDefault(s => s.Name.Equals(starName, StringComparison.OrdinalIgnoreCase));
+        if (star != null)
+        {
+            DisplayStarDetails(star.Id);
+        }
+        else
+        {
+            Console.WriteLine("Звезда не найдена.");
+        }
     }
 }
 
-// Класс для управления клиентским приложением
 public class ClientApplication
 {
     private DatabaseManager dbManager = new DatabaseManager();
 
-    // Метод для запуска клиентского приложения
     public void RunApplication()
     {
         dbManager.LoadDataFromDatabase();
         dbManager.DisplayStarsInformation();
 
-        // Запуск основного цикла приложения
+        Console.WriteLine("Введите ID или название звезды для получения подробной информации:");
+        var input = Console.ReadLine();
+        if (int.TryParse(input, out int starId))
+        {
+            dbManager.DisplayStarDetails(starId);
+        }
+        else
+        {
+            dbManager.DisplayStarDetails(input);
+        }
     }
 }
 
-// Основной класс программы
 public class Program
 {
     public static void Main()
