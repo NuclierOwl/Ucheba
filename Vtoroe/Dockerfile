@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=build-env /app/out .
 
 # Запускаем приложение
-ENTRYPOINT ["dotnet", "Plilozuha.dll"]
+ENTRYPOINT ["dotnet", "Plilozuha.cs"]
