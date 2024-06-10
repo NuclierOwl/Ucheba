@@ -4,7 +4,7 @@ CREATE TABLE constellations (
     Description TEXT
 );
 
-CREATE TABLE звезды (
+CREATE TABLE stars (
     ID_Zvezda INT PRIMARY KEY,
     Name_zvezda VARCHAR(255),
     Ox DECIMAL(10, 2),
