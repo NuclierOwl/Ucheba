@@ -1,4 +1,4 @@
-CREATE TABLE созвездия (
+CREATE TABLE constellations (
     ID INT PRIMARY KEY,
     Name VARCHAR(255),
     Description TEXT
