@@ -15,14 +15,14 @@ CREATE TABLE stars (
     FOREIGN KEY (ID_Sozvezdie) REFERENCES созвездия(ID)
 );
 
-INSERT INTO созвездия (ID, Name, Description) VALUES
+INSERT INTO constellations (ID, Name, Description) VALUES
 (1, 'Орион', 'Созвездие Орион'),
 (2, 'Большая Медведица', 'Созвездие Большая Медведица'),
 (3, 'Лира', 'Созвездие Лира'),
 (4, 'Кассиопея', 'Созвездие Кассиопея'),
 (5, 'Скорпион', 'Созвездие Скорпион');
 
-INSERT INTO звезды (ID,    Name_zvezda, Ox, Oy, Description, ID_Sozvezdie, Razmer) VALUES
+INSERT INTO stars (ID,    Name_zvezda, Ox, Oy, Description, ID_Sozvezdie, Razmer) VALUES
 (1, 'Сириус', 12.34, 56.78, 'Яркая звезда', 1, 'Большая'),
 (2, 'Альдебаран', 23.45, 67.89, 'Красная звезда', 1, 'Средняя'),
 (3, 'Вега', 34.56, 78.90, 'Сверкающая звезда', 3, 'Большая'),
